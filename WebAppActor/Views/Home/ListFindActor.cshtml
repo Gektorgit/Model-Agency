@@ -1,0 +1,145 @@
+﻿@model WebAppActor.Models.ViewModelActor
+@using WebAppActor.HtmlHelpers
+
+<style>
+    td {
+        text-align: center;
+        font-family: 'Comic Sans MS';
+        font-size: small;
+        color: #F78A1E;
+    }
+
+        td.small {
+            font-size: 9px;
+        }
+
+    .galleria-errors {
+        display: none;
+    }
+    /*  This rule is exclude error height: */
+    #galleria {
+        height: 530px;
+        width: 700px;
+        background-color: Transparent;
+    }
+        /* This rule is read by Galleria to define the gallery height: */
+
+        /* #galleria{height:300px;width:500px} */
+        #galleria .galleria-thumbnails .galleria-image {
+            height: 80px;
+        }
+
+        #galleria .galleria-stage {
+            bottom: 120px;
+        }
+
+        #galleria .galleria-thumbnails-container {
+            height: 100px;
+        }
+</style>
+
+<script src="/galleria/galleria-1.2.9.min.js"></script>
+
+@{
+    ViewBag.Title = "ListFindActor";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@{
+    ViewBag.Title = "Результат поиска";
+}
+@{
+    int FirstPhoto = 0;
+    Boolean hasdata = Model.PageInfo.TotalItems > 0;
+}
+
+<div id="main" style=" padding-top:100px; ">
+    <div style="float:left;">
+        <table>
+
+            @foreach (var item in Model.Actors)
+            {
+                if (FirstPhoto == 0) { FirstPhoto = item.ActorId; }
+
+                <tr>
+                    <td>
+                        @{
+                if (@item.PhotoActor.FirstOrDefault().PhotoSmall != null)
+                {
+                    <a href="#" data-actorid="@item.ActorId" class="img-list-page">
+                        <img src="data:image/jpg;base64,@(Html.Raw(Convert.ToBase64String((byte[])item.PhotoActor.FirstOrDefault().PhotoSmall)))" class="image-border" alt="" />
+                    </a>
+                }
+                else
+                {
+                    <img src="../../Content/image/placeholder-100.jpg" class="image-border" alt="Нет фото" />
+                }
+                        }
+                        @*<br />
+                        <p>
+                            actor № @item.ActorId
+                        </p>*@
+                        <br />
+                        <p>
+                            <a href='@Url.Action("EditActor", "Actor", new { id = @item.ActorId })' title='click to edit the data, the actor'>actor № @item.ActorId</a>
+
+                        </p>
+
+                    </td>
+                </tr>
+            }
+            @if (Model.PageInfo.TotalItems >= 5)
+            {
+                <tr>
+                    <td>@Html.PageLinks(Model.PageInfo, x => Url.Action("ListFindActor", new { id = x }))</td>
+                </tr>
+                <tr>
+                    <td class="small">all models found <strong>@Model.PageInfo.TotalItems</strong> </td>
+
+                </tr>
+                <tr>
+                    <td class="small">total pages <strong>@Model.PageInfo.TotalPages</strong></td>
+                </tr>
+                <tr>
+                    <td class="small">current page <strong>@Model.PageInfo.CurrentPage</strong></td>
+                </tr>
+
+            }
+        </table>
+
+    </div>
+    <div id="PhotoActor" class="div-photo-actor" style="width:700px; text-align:center;">
+        <image src="../../Content/image/loading.gif" style="height:30px;"></image><h2 style="color:#F78A1E;">Loading image...</h2>
+    </div>
+
+
+</div>
+
+<script type="text/javascript">
+
+    $(function () {
+        function getphotoactor() {
+            //val() - получить значение; val(filter) присвоить значение filter;
+            var Url = '@Url.Action("GetAllPhotoActor", new { id = @FirstPhoto })';
+            $("#PhotoActor").delay(1000).slideDown("normal", function () { $(this).load(Url) });
+
+        }
+        var hasdata = '@hasdata';
+        if (hasdata) getphotoactor();
+
+        $("table").on("click", "a.img-list-page", function (e) {
+            var ActorId = $(this).attr('data-actorid');
+            var Url = '@Url.Action("GetAllPhotoActor", "Home")';
+            Url = Url + '/' + ActorId;
+
+            $("#PhotoActor").empty().html("<div style=\"width:600px; text-align:center;\"  ><image src=\"../../Content/image/loading.gif\" style=\"height:30px;\" ></image><h2 style=\"color:#F78A1E;\">Loading image...</h2> </div>")
+                           .delay(1000).slideDown("normal", function () {
+                               $(this).load(Url)
+                           });
+        });
+
+    });
+
+
+</script>
+
+

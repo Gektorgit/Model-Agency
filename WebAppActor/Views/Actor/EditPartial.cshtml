@@ -1,0 +1,151 @@
+﻿@model WebAppActor.DataLayer.DatabaseLayer.ActorInfo
+
+@using (Html.BeginForm("EditPartial", "Actor", FormMethod.Post, new { id = "form-edit", style = "padding-top:5px;  padding-left:20px;" }))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.ActorId)
+
+
+        <div class="container-fluid" style="width:900px;">
+
+            <div class="row" style="width:100%;">
+                <div class="col-xs-2 col-md-2">
+                    First Name
+                </div>
+                <div class="col-xs-4 col-md-4">
+                    @Html.TextBoxFor(model => model.ActorFirstName)
+                </div>
+                <div class="col-xs-2 col-md-2">
+                    Last Name
+                </div>
+                <div class="col-xs-4 col-md-4">
+                    @Html.TextBoxFor(model => model.ActorLastName)
+                </div>
+
+
+            </div>
+        </div>
+        <div class="container-fluid" style="width:900px; padding-top:20px;">
+
+            <div class="row" style="width:100%;">
+                <div class="col-xs-2 col-md-2">
+                    color eyes
+                </div>
+                <div class="col-xs-4 col-md-4">
+                    @Html.DropDownList("EyesId", new SelectList(ViewBag.Eyes as System.Collections.IEnumerable, "EyesId", "EyesType"), new { id = "EyesId", @class = "select-class" })
+                </div>
+                <div class="col-xs-2 col-md-2">
+                    Birthday
+                </div>
+                <div class="col-xs-4 col-md-4">
+                    @Html.TextBoxFor(model => model.ActorBirthday)
+                </div>
+
+
+            </div>
+        </div>
+        <div class="container-fluid" style="width:900px;padding-top:20px;">
+            <div class="row" style="width:100%;">
+                <div class="col-xs-2 col-md-2" data-original-title="">
+                    @Html.EditorFor(model => model.IsModel) model
+                </div>
+                <div class="col-xs-2 col-md-2">
+                    @Html.EditorFor(model => model.IsActor) actor
+                </div>
+                <div class="col-xs-2 col-md-2" data-original-title="">
+                    @Html.EditorFor(model => model.IsSportman) sportsman
+                </div>
+                <div class="col-xs-2 col-md-2" data-original-title="">
+                    @Html.EditorFor(model => model.IsExperience) experience
+                </div>
+                <div class="col-xs-2 col-md-2" data-original-title="">
+                    @Html.EditorFor(model => model.Male) male
+                </div>
+            </div>
+        </div>
+        <div class="container-fluid" style="width:900px;padding-top:20px;">
+            <div class="row" style="width:100%;">
+                <div class="col-xs-2 col-md-2">
+                    Heigth
+                </div>
+                <div class="col-xs-4 col-md-4">
+                    @Html.TextBoxFor(model => model.Heigth)
+                </div>
+
+                <div class="col-xs-2 col-md-2">
+                    @Html.EditorFor(model => model.IsExperience) Experience
+                </div>
+                <div class="col-xs-2 col-md-2">
+                    @Html.EditorFor(model => model.IsCrowdScene) CrowdScene
+                </div>
+            </div>
+        </div>
+
+        <div class="container-fluid" style="width:900px;padding-top:20px;">
+            <div class="row" style="width:100%;">
+                <div class="col-xs-2 col-md-2">
+                    Agency
+                </div>
+                <div class="col-xs-6 col-md-6">
+                    @Html.TextBoxFor(model => model.Agency, new { @class = "wide" })
+                </div>
+
+
+            </div>
+        </div>
+
+        <div class="container-fluid" style="width:900px;padding-top:20px;">
+            <div class="row" style="width:100%;">
+                <div class="col-xs-2 col-md-2">
+                    WorkingPlace
+                </div>
+                <div class="col-xs-6 col-md-6">
+                    @Html.TextAreaFor(model => model.WorkingPlace, new { @class = "wide editor-textarea" })
+                </div>
+
+
+            </div>
+        </div>
+
+
+        <div class="container-fluid" style="width:900px;padding-top:20px;">
+            <div class="row" style="width:100%;">
+                <div class="col-xs-2 col-md-2">
+                    Telephon
+                </div>
+                <div class="col-xs-6 col-md-6">
+                    @Html.TextAreaFor(model => model.Telephon, new { @class = "wide editor-textarea" })
+                </div>
+
+
+            </div>
+        </div>
+
+        <div class="container-fluid" style="width:900px;padding-top:20px;">
+            <div class="row" style="width:100%;">
+                <div class="col-xs-2 col-md-2">
+                    SpecifyExpirience
+                </div>
+                <div class="col-xs-6 col-md-6">
+                    @Html.TextAreaFor(model => model.SpecifyExpirience, new { @class = "wide editor-textarea" })
+                </div>
+            </div>
+        </div>
+
+        <div class="container-fluid" style="width:900px;padding-top:20px;">
+            <div class="row" style="width:100%;">
+                <div class="col-xs-2 col-md-2">
+                    ExtendedInfo
+                </div>
+                <div class="col-xs-6 col-md-6">
+                    @Html.TextAreaFor(model => model.ExtendedInfo, new { @class = "wide editor-textarea" })
+                </div>
+            </div>
+        </div>
+
+    </div>
+}

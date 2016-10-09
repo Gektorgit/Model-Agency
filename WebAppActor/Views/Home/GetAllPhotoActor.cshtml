@@ -1,0 +1,96 @@
+﻿@model WebAppActor.Models.ViewModelPhoto
+
+<div id="galleria">
+        @foreach (var item in Model.photo)
+        {
+            <a href='@Url.Action("GetPhotoLarge", "Home", new { id = item.PhotoId })' class='active'>
+                <img src='@Url.Action("GetPhotoSmall", "Home", new { id = item.PhotoId })' ,
+                     data-big='@Url.Action("GetPhotoSmall", "Home", new { id = item.PhotoId })'>
+            </a>
+        }
+    </div>
+
+<div class="container-fluid" style="width:700px;">
+
+    <div class="row" style="width:100%;">
+
+        <div class="col-xs-2 col-md-2" data-original-title="">
+            @{int age = DateTime.Now.Year - Model.actor.ActorBirthday.Year;}
+            @age age
+        </div>
+        <div class="col-xs-2 col-md-2" data-original-title="">
+            @Html.DisplayFor(model => model.actor.IsModel) model
+        </div>
+        <div class="col-xs-2 col-md-2">
+            @Html.DisplayFor(model => model.actor.IsActor) actor
+        </div>
+        <div class="col-xs-2 col-md-2" data-original-title="">
+            @Html.DisplayFor(model => model.actor.IsSportman) sportsman
+        </div>
+        <div class="col-xs-2 col-md-2" data-original-title="">
+            @Html.DisplayFor(model => model.actor.IsExperience) experience
+        </div>
+    </div>
+</div>
+
+
+<div class="container-fluid" style="width:600px;">
+
+    <div class="row" style="width:100%;">
+        <div class="col-md-4" data-original-title="">
+            <button id="btnadd" type="submit" class="btn btn-warning" style="float: left; width: 180px;" title='add select photo to project'>
+                <i class="icon-plus-sign icon-white"></i><span style="padding: 10px;">add to project</span>
+            </button>
+        </div>
+        @{
+            WebAppActor.Models.TempProject temp = (WebAppActor.Models.TempProject)Session["TempProject"];
+            var countRecDetail = (temp == null) ? 0 : temp.Count;
+        }
+        <div id='project' class="span4" data-count='@countRecDetail'>
+
+        </div>
+    </div>
+</div>
+<div id="alert-area">
+</div>
+
+<script type="text/javascript">
+    Galleria.loadTheme('/galleria/themes/classic/galleria.classic.min.js');
+    Galleria.run('#galleria', { showInfo: false, imageMargin: 0, transition: 'fade' });
+</script>
+<script type="text/javascript">
+    function raiseAlert(type, title, message) {
+        $("#alert-area").append($("<div class='alert alert-message fade in alert-" + type + "' data-alert> <a class='close' data-dismiss='alert'>×</a><strong>" + title + "</strong> " + message + "</div>"));
+        $(".alert-message").delay(2000).slideDown("slow", function () { $(this).remove(); });
+    }
+    $(function () {
+        function InitProject() {
+            var count = $("#project").attr('data-count');
+            var btnFullPrj = "<button  id=\"btnproject\" type=\"submit\" class=\"btn btn-warning\" style=\"float: left; width: 200px;\" title='project contains " +
+                             count + " photo' > <i class=\"icon-folder-open icon-white\"></i><span style=\"padding: 10px;\">show user project</span></button>";
+            var btnEmptyPrj = "<button  id=\"btnproject\" type=\"submit\" class=\"btn btn-warning\" style=\"float: left; width: 200px;\" title='project is empty' >" +
+            " <i class=\"icon-folder-close icon-white\"></i><span style=\"padding: 10px;\">user project</span></button>";
+            var txt = (count > 0) ? btnFullPrj : btnEmptyPrj;
+            $("#project").empty().html(txt);
+        }
+        InitProject();
+
+        $('#btnadd').on('click', function () {
+            var urlselectphoto = $('.galleria-image.active img').attr('src');
+            var arr = urlselectphoto.split('/');
+            var id = arr[arr.length - 1];
+            //var id = $('.galleria-image.active img').attr('data-description');
+            var Url = '@Url.Action("AddCart", "Cart")';
+            $.getJSON(Url, { id: id }, function (result) {
+                $("#project").attr('data-count', result);
+                raiseAlert('success', 'adding photo to temp project ' + id, 'photo number #' + id + ' add!');
+                //InitProject();
+            });
+        });
+        $('#btnproject').on('click', function () {
+            var count = $("#project").attr('data-count');
+            if (count > 0) window.location.href = '/Cart/ViewTempProject';
+            else alert('current project is empty. add photos to the project actors.');
+        });
+    });
+</script>

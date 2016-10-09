@@ -1,0 +1,244 @@
+﻿@model WebAppActor.DataLayer.BusinessLayer.ActorsFilter
+
+@{
+    ViewBag.Title = "find actor";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+
+<table>
+    <tr>
+        <td style=" width: 60%;">
+            @using (Html.BeginForm("FindActor", "Home", FormMethod.Post, new { id = "form-find", style = "padding-top:100px;" }))
+            {
+
+                <fieldset>
+                    <legend style="color:#F78A1E;">set the filter to search for actors</legend>
+
+                    <input id="isfinddata" name="actor.ActorId" type="hidden" value="@ViewBag.IsData" data-isfound="@ViewBag.IsData" />
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-xs-6 col-md-4">
+                                @Html.LabelFor(model => model.ActorId)
+                            </div>
+                            <div class="col-xs-6 col-md-4">
+                                @Html.TextBoxFor(model => model.ActorId, new { @class = "smallwidth" })
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="container-fluid container-margin">
+                        <div class="row">
+
+                            <div class="col-xs-6 col-md-4">
+                                @Html.LabelFor(model => model.ActorFirstName)
+                            </div>
+                            <div class="col-xs-6 col-md-4">
+                                @Html.TextBoxFor(model => model.ActorFirstName)
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="container-fluid container-margin">
+                        <div class="row">
+
+                            <div class="col-xs-6 col-md-4">
+                                @Html.LabelFor(model => model.ActorLastName)
+                            </div>
+                            <div class="col-xs-6 col-md-4">
+                                @Html.TextBoxFor(model => model.ActorLastName)
+                            </div>
+                        </div>
+
+                    </div>
+
+
+                    @* возраст от и до*@
+
+                    <div class="container-fluid container-margin">
+                        <div class="row">
+                            <div class="col-xs-4 col-md-4">
+                                @Html.LabelFor(model => model.AgeFrom)
+                            </div>
+                            <div class="col-xs-2 col-md-2">
+                                @Html.TextBoxFor(model => model.AgeFrom, new { @class = "smallwidth" })
+                            </div>
+                            <div class="col-xs-1 col-md-1">
+                                @Html.LabelFor(model => model.AgeTo)
+                            </div>
+
+                            <div class="col-xs-3 col-md-3">
+                                @Html.TextBoxFor(model => model.AgeTo, new { @class = "smallwidth" })
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="container-fluid container-margin">
+                        <div class="row">
+                            <div class="col-xs-4 col-md-4">
+                                @Html.LabelFor(model => model.HeightFrom)
+                            </div>
+                            <div class="col-xs-2 col-md-2">
+                                @Html.TextBoxFor(model => model.HeightFrom, new { @class = "smallwidth" })
+                            </div>
+                            <div class="col-xs-1 col-md-1">
+                                @Html.LabelFor(model => model.HeightTo)
+                            </div>
+
+                            <div class="col-xs-3 col-md-3">
+                                @Html.TextBoxFor(model => model.HeightTo, new { @class = "smallwidth" })
+                            </div>
+                        </div>
+
+                    </div>
+
+                    @*<div class="container-fluid container-margin">
+                        <div class="row">
+                            <div class="col-xs-4 col-md-4">
+                                @Html.LabelFor(model => model.EyesId)
+                            </div>
+                            <div class="col-xs-3 col-md-3">
+                                @@Html.TextBoxFor(model => model.Eyes, new { @class = "smallwidth" })
+                                @Html.DropDownList("EyesId", new SelectList(ViewBag.EyesId as System.Collections.IEnumerable, "EyesId", "EyesType"), new { id = "EyesId", @class = "select-class" })
+                                 @Html.DropDownList("EyesId")
+                            </div>
+                        </div>
+
+                    </div>*@
+
+                    <div class="container-fluid">
+                        <div class="row">
+
+                            <div class="col-xs-6 col-md-4">
+                                @Html.EditorFor(model => model.IsMan)
+                            </div>
+                            <div class="col-xs-6 col-md-4">
+                                @Html.LabelFor(model => model.IsMan)
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="container-fluid">
+                        <div class="row">
+
+                            <div class="col-xs-6 col-md-4">
+                                @Html.EditorFor(model => model.IsWoman)
+                            </div>
+                            <div class="col-xs-6 col-md-4">
+                                @Html.LabelFor(model => model.IsWoman)
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="container-fluid">
+                        <div class="row">
+
+                            <div class="col-xs-6 col-md-4">
+                                @Html.EditorFor(model => model.IsActor)
+                            </div>
+                            <div class="col-xs-6 col-md-4">
+                                @Html.LabelFor(model => model.IsActor)
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="container-fluid">
+                        <div class="row">
+
+                            <div class="col-xs-6 col-md-4">
+                                @Html.EditorFor(model => model.IsModel)
+                            </div>
+                            <div class="col-xs-6 col-md-4">
+                                @Html.LabelFor(model => model.IsModel)
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="container-fluid">
+                        <div class="row">
+
+                            <div class="col-xs-6 col-md-4">
+                                @Html.EditorFor(model => model.IsSportsman)
+                            </div>
+                            <div class="col-xs-6 col-md-4">
+                                @Html.LabelFor(model => model.IsSportsman)
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="container-fluid">
+                        <div class="row">
+
+                            <div class="col-xs-6 col-md-4">
+                                @Html.EditorFor(model => model.IsExpirience)
+                            </div>
+                            <div class="col-xs-6 col-md-4">
+                                @Html.LabelFor(model => model.IsExpirience)
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="container-fluid">
+                        <div class="row">
+
+                            <div class="col-xs-6 col-md-4">
+                                @Html.EditorFor(model => model.IsCrowdScene)
+                            </div>
+                            <div class="col-xs-6 col-md-4">
+                                @*@Html.LabelFor(model => model.IsCrowdScene)*@
+                                <b>crowd scene</b>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="container-fluid container-margin">
+                        <div class="row">
+
+                            <div class="col-xs-6 col-md-4">
+                                @Html.LabelFor(model => model.KeyWord)
+                            </div>
+                            <div class="col-xs-6 col-md-4">
+                                @Html.TextBoxFor(model => model.KeyWord)
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="container-fluid container-margin">
+                        <div class="row">
+                            <div class="col-xs-6 col-md-4">
+                                <button type="submit" class="btn btn-warning">
+                                    <i class="glyphicon glyphicon-search"></i><span style="padding: 10px;">Find</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                </fieldset>
+
+
+            }
+        </td>
+        <td style=" vertical-align:top; text-align:left; padding-top:130px;">
+            <div class="row-fluid span12">
+                <div class="span7">
+                    <p style=" width:350px;">
+                        How to use the filter?
+                        <ul>
+                            <li>if you do not specify the conditions - all selected models</li>
+                            <li>first, last  name  and keyword can be set not fully</li>
+                            <li>search by keyword - such as - gray, stoop, etc...</li>
+                        </ul>
+                    </p>
+
+                </div>
+            </div>
+        </td>
+    </tr>
+</table>

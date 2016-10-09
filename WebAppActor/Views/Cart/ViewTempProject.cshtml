@@ -1,0 +1,160 @@
+﻿@model WebAppActor.Models.TempProject
+@using WebAppActor.DataLayer.DatabaseLayer
+@{
+    ViewBag.Title = "view user temp project";
+}
+<style>
+    .color_prj {
+        color: #F78A1E;
+    }
+</style>
+@using (Html.BeginForm("ViewTempProject", "Cart", FormMethod.Post, new { style = "padding-top:100px;" }))
+{
+    @Html.ValidationSummary(true)
+    @Html.HiddenFor(model => model.returnUrl)
+
+    <fieldset>
+        <legend style="color:#F78A1E;">current temp project user</legend>
+        <div class="container-fluid" style="width: 800px;">
+            <div class="row" style="width:100%;">
+                <div class="col-xs-2 col-md-2" data-original-title="">
+                    user name  
+                </div>
+                <div class="col-xs-3 col-md-3" data-original-title="">
+                    Test User @*@User.Identity.Name*@
+                </div>
+                <div class="col-xs-2 col-md-2" data-original-title="">
+                    project name
+                </div>
+                <div class="col-xs-3 col-md-3" data-original-title="">
+                    @Html.TextBoxFor(model => model.prjMain.PrjName)
+                    @Html.ValidationMessageFor(model => model.prjMain.PrjName)
+                </div>
+
+
+            </div>
+        </div>
+    </fieldset>
+    <fieldset>
+        <legend style="color:#F78A1E;">select photo current temp project user</legend>
+        <div id="main">
+
+            @foreach (var item in Model.TempCollection)
+            {
+                <div id='detail-@item.PrjDetailId' class="container-fluid " style="width: 800px; padding-top : 15px;">
+                    <div class="row" style="width:100%;">
+                        <div class="col-xs-2 col-md-2" data-original-title="">
+                            <a href='@Url.Action("GetPhotoLarge", "Home", new { id = item.PhotoId })' class='active'>
+                                <img src='@Url.Action("GetPhotoSmall", "Home", new { id = item.PhotoId, @class = "img-list-page" })' ,
+                                     data-title="@item.PrjMainId"
+                                     data-description="@item.PrjDetailId">
+                            </a>
+                        </div>
+
+
+                        <div class="col-xs-10 col-md-10" data-original-title="">
+                            <div class="container-fluid" style="width: 100%;">
+                                <div class="row" style="width:100%;">
+                                    <div class="col-xs-3 col-md-3" data-original-title="">
+                                        @{int actorid = (int)Model.GetActor(item.PhotoId).ActorId;}
+                                        actor number @actorid
+                                    </div>
+                                   
+                                    <div class="col-xs-3 col-md-3">
+
+                                        is experience @Html.DisplayFor(model => model.GetActor(item.PhotoId).IsExperience)
+
+                                    </div>
+                                  
+                                    <div class="col-xs-3 col-md-3" data-original-title="">
+
+                                        is sportsman @Html.DisplayFor(model => model.GetActor(item.PhotoId).IsExperience)
+
+                                    </div>
+                                    <div class="col-xs-3 col-md-3" data-original-title="">
+                                        <button data-photoid="@item.PrjDetailId" type="button" class="btn btn-warning btn-delete-photo" style="float: left; width: 120px;" title='click for find actor by number'>
+                                            <i class="icon-remove-sign icon-white"></i><span style="padding: 10px;">delete</span>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+            }
+        </div>
+
+
+
+        <div class="container-fluid " style="width: 800px; padding-top : 15px;">
+            <div class="row" style="width:100%;">
+                <div class="col-xs-3 col-md-3" data-original-title="">
+                    <button id="btnsave" type="submit" class="btn btn-warning" style="float: left; width: 180px;">
+                        <i class="glyphicon glyphicon-floppy-save"></i><span style="padding: 10px;">save project</span>
+                    </button>
+                </div>
+                <div class="col-xs-1 col-md-1 offset2" data-original-title="">
+                </div>
+                <div class="col-xs-3 col-md-3" data-original-title="">
+                    <button id="btnprevieous" type="button" class="btn btn-warning" style="float: left; width: 180px;">
+                        <i class="glyphicon glyphicon-circle-arrow-left"></i><span style="padding: 10px;">previous page</span>
+                    </button>
+                </div>
+                
+                <div class="col-xs-1 col-md-1 offset2" data-original-title="">
+                </div>
+                <div class="col-xs-3 col-md-3" data-original-title="">
+                    <button id="btnpreview" type="button" class="btn btn-warning" style="float: left; width: 180px;">
+                        <i class="glyphicon glyphicon-eye-open"></i><span style="padding: 10px;">preview</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+    </fieldset>
+}
+<div id="alert-area">
+</div>
+<script type="text/javascript">
+
+    function raiseAlert(type, title, message) {
+        $("#alert-area").append($("<div class='alert alert-message fade in alert-" + type + "' data-alert> <a class='close' data-dismiss='alert'>×</a><strong>" + title + "</strong> " + message + "</div>"));
+        $(".alert-message").delay(2000).slideDown("slow", function () { $(this).remove(); });
+    }
+
+
+    $(function () {
+
+        $('#btnsave').click(function () {
+            Alert("Fack in shet");
+            @Url.Action("Save", "Cart");
+        });
+
+        $('#btnpreview').click(function () {
+            var url = '@Url.Action("ReportPdf", "Cart")'
+            window.open(url, '_blank');
+        });
+        $('#btnprevieous').click(function () {
+            var url = $('#returnUrl').val();
+            window.location.href = url;
+        });
+
+        $('.btn-delete-photo').click(function () {
+            if (confirm('Are you sure you want to delete a phot from project?')) {
+                var id = $(this).attr('data-photoid');
+                var url = '@Url.Action("DeleteTempProject", "Cart")';
+                $.getJSON(url, { id: id }, function (result) {
+                    if (result == 1) {
+                        var selectphoto = '#detail-' + id;
+                        $(selectphoto).hide();
+                        raiseAlert('info', 'photo success remove from test project...', '');
+                    }
+                });
+
+            }
+        });
+    });
+
+</script>

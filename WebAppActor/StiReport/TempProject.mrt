@@ -1,0 +1,263 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<StiSerializer version="1.0" application="StiReport">
+  <Dictionary Ref="1" type="Dictionary" isKey="true">
+    <Databases isList="true" count="0" />
+    <DataSources isList="true" count="1">
+      <UserProject Ref="2" type="DataTableSource" isKey="true">
+        <Alias>UserProject</Alias>
+        <Columns isList="true" count="5">
+          <value>PhotoId,System.Int32</value>
+          <value>PhotoLarge,System.Byte[]</value>
+          <value>ActorId,System.Int32</value>
+          <value>Age,System.Int32</value>
+          <value>ActorHeght,System.Int32</value>
+        </Columns>
+        <Dictionary isRef="1" />
+        <Name>UserProject</Name>
+        <NameInSource>UserProject</NameInSource>
+      </UserProject>
+    </DataSources>
+    <Relations isList="true" count="0" />
+    <Report isRef="0" />
+    <Variables isList="true" count="0" />
+  </Dictionary>
+  <GlobalizationStrings isList="true" count="0" />
+  <Pages isList="true" count="1">
+    <Страница1 Ref="3" type="Page" isKey="true">
+      <Border>None;Black;2;Solid;False;4;Black</Border>
+      <Brush>Transparent</Brush>
+      <Components isList="true" count="1">
+        <DataMain Ref="4" type="DataBand" isKey="true">
+          <Brush>Transparent</Brush>
+          <ClientRectangle>0,0.4,20,12.6</ClientRectangle>
+          <Components isList="true" count="9">
+            <Картинка1 Ref="5" type="Image" isKey="true">
+              <Brush>Transparent</Brush>
+              <CanGrow>True</CanGrow>
+              <CanShrink>True</CanShrink>
+              <ClientRectangle>0.6,2.45,11,10</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <DataColumn>UserProject.PhotoLarge</DataColumn>
+              <MaxSize>0,0</MaxSize>
+              <MinSize>0,0</MinSize>
+              <Name>Картинка1</Name>
+              <Page isRef="3" />
+              <Parent isRef="4" />
+            </Картинка1>
+            <Текст2 Ref="6" type="Text" isKey="true">
+              <Brush>Transparent</Brush>
+              <ClientRectangle>15.4,0.05,4.4,0.45</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>Arial,9</Font>
+              <Guid>204a4ee8b422467b8c59690b7f3ce015</Guid>
+              <HorAlignment>Right</HorAlignment>
+              <LinesOfUnderline>None</LinesOfUnderline>
+              <Margins>0,0,0,0</Margins>
+              <MaxSize>0,0</MaxSize>
+              <MinSize>0,0</MinSize>
+              <Name>Текст2</Name>
+              <Page isRef="3" />
+              <Parent isRef="4" />
+              <Text>{Time}</Text>
+              <TextBrush>Black</TextBrush>
+              <TextFormat Ref="7" type="GeneralFormat" isKey="true" />
+              <Type>Expression</Type>
+            </Текст2>
+            <Текст14 Ref="8" type="Text" isKey="true">
+              <Brush>Transparent</Brush>
+              <ClientRectangle>11.8,0,3.4,0.45</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>Arial,9</Font>
+              <Guid>732a9f6b3bb641f28944e49d25331394</Guid>
+              <HorAlignment>Right</HorAlignment>
+              <LinesOfUnderline>None</LinesOfUnderline>
+              <Margins>0,0,0,0</Margins>
+              <MaxSize>0,0</MaxSize>
+              <MinSize>0,0</MinSize>
+              <Name>Текст14</Name>
+              <Page isRef="3" />
+              <Parent isRef="4" />
+              <Text>time print project</Text>
+              <TextBrush>Black</TextBrush>
+              <TextFormat Ref="9" type="GeneralFormat" isKey="true" />
+              <Type>Expression</Type>
+            </Текст14>
+            <Текст17 Ref="10" type="Text" isKey="true">
+              <Brush>Transparent</Brush>
+              <ClientRectangle>0.8,1.2,5.2,0.6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>Calibri,9,Bold</Font>
+              <Guid>025e781c992a43ad8dd641bc405f8e97</Guid>
+              <LinesOfUnderline>None</LinesOfUnderline>
+              <Margins>0,0,0,0</Margins>
+              <MaxSize>0,0</MaxSize>
+              <MinSize>0,0</MinSize>
+              <Name>Текст17</Name>
+              <Page isRef="3" />
+              <Parent isRef="4" />
+              <Text>actor age</Text>
+              <TextBrush>Gray</TextBrush>
+              <TextFormat Ref="11" type="GeneralFormat" isKey="true" />
+              <Type>Expression</Type>
+            </Текст17>
+            <Текст21 Ref="12" type="Text" isKey="true">
+              <Brush>Transparent</Brush>
+              <ClientRectangle>8.6,1.2,7.6,0.6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>Calibri,9,Bold</Font>
+              <Guid>ff864191247b4915bf54b982b059de4f</Guid>
+              <LinesOfUnderline>None</LinesOfUnderline>
+              <Margins>0,0,0,0</Margins>
+              <MaxSize>0,0</MaxSize>
+              <MinSize>0,0</MinSize>
+              <Name>Текст21</Name>
+              <Page isRef="3" />
+              <Parent isRef="4" />
+              <Text>{UserProject.Age}</Text>
+              <TextBrush>Gray</TextBrush>
+              <TextFormat Ref="13" type="DateFormat" isKey="true" />
+              <Type>Expression</Type>
+            </Текст21>
+            <Текст22 Ref="14" type="Text" isKey="true">
+              <Brush>Transparent</Brush>
+              <ClientRectangle>0.8,1.8,5.2,0.6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>Calibri,9,Bold</Font>
+              <Guid>c5070d95579b4f9c880989ec4554bf90</Guid>
+              <LinesOfUnderline>None</LinesOfUnderline>
+              <Margins>0,0,0,0</Margins>
+              <MaxSize>0,0</MaxSize>
+              <MinSize>0,0</MinSize>
+              <Name>Текст22</Name>
+              <Page isRef="3" />
+              <Parent isRef="4" />
+              <Text>actor height</Text>
+              <TextBrush>Gray</TextBrush>
+              <TextFormat Ref="15" type="GeneralFormat" isKey="true" />
+              <Type>Expression</Type>
+            </Текст22>
+            <Текст23 Ref="16" type="Text" isKey="true">
+              <Brush>Transparent</Brush>
+              <ClientRectangle>8.6,1.8,7.6,0.6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>Calibri,9,Bold</Font>
+              <Guid>c7c9d672a91c4b0885d54a7156af0750</Guid>
+              <LinesOfUnderline>None</LinesOfUnderline>
+              <Margins>0,0,0,0</Margins>
+              <MaxSize>0,0</MaxSize>
+              <MinSize>0,0</MinSize>
+              <Name>Текст23</Name>
+              <Page isRef="3" />
+              <Parent isRef="4" />
+              <Text>{UserProject.ActorHeght}</Text>
+              <TextBrush>Gray</TextBrush>
+              <TextFormat Ref="17" type="DateFormat" isKey="true" />
+              <Type>Expression</Type>
+            </Текст23>
+            <Текст24 Ref="18" type="Text" isKey="true">
+              <Brush>Transparent</Brush>
+              <ClientRectangle>0.8,0.6,5.2,0.6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>Calibri,9,Bold</Font>
+              <Guid>f8c86075f5964d0192495c1d653b357f</Guid>
+              <LinesOfUnderline>None</LinesOfUnderline>
+              <Margins>0,0,0,0</Margins>
+              <MaxSize>0,0</MaxSize>
+              <MinSize>0,0</MinSize>
+              <Name>Текст24</Name>
+              <Page isRef="3" />
+              <Parent isRef="4" />
+              <Text>actor number</Text>
+              <TextBrush>Gray</TextBrush>
+              <TextFormat Ref="19" type="GeneralFormat" isKey="true" />
+              <Type>Expression</Type>
+            </Текст24>
+            <Текст25 Ref="20" type="Text" isKey="true">
+              <Brush>Transparent</Brush>
+              <ClientRectangle>8.6,0.6,7.6,0.6</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>Calibri,9,Bold</Font>
+              <Guid>4b3f2ac4fd564b429c1e4e18d179bc19</Guid>
+              <LinesOfUnderline>None</LinesOfUnderline>
+              <Margins>0,0,0,0</Margins>
+              <MaxSize>0,0</MaxSize>
+              <MinSize>0,0</MinSize>
+              <Name>Текст25</Name>
+              <Page isRef="3" />
+              <Parent isRef="4" />
+              <Text>{UserProject.ActorId}</Text>
+              <TextBrush>Gray</TextBrush>
+              <TextFormat Ref="21" type="DateFormat" isKey="true" />
+              <Type>Expression</Type>
+            </Текст25>
+          </Components>
+          <Conditions isList="true" count="0" />
+          <DataRelationName />
+          <DataSourceName>UserProject</DataSourceName>
+          <Filters isList="true" count="0" />
+          <MaxHeight>0</MaxHeight>
+          <MinHeight>0</MinHeight>
+          <Name>DataMain</Name>
+          <Page isRef="3" />
+          <Parent isRef="3" />
+          <Sort isList="true" count="0" />
+        </DataMain>
+      </Components>
+      <Conditions isList="true" count="0" />
+      <Guid>9ee3270176e643df89dca8cf1dcce9dc</Guid>
+      <Margins>0.5,0.5,1,1</Margins>
+      <Name>Страница1</Name>
+      <Page isRef="3" />
+      <PageHeight>29.7</PageHeight>
+      <PageWidth>21</PageWidth>
+      <Report isRef="0" />
+      <Watermark Ref="22" type="Stimulsoft.Report.Components.StiWatermark" isKey="true">
+        <Font>Arial,100</Font>
+        <TextBrush>[50:0:0:0]</TextBrush>
+      </Watermark>
+    </Страница1>
+  </Pages>
+  <PrinterSettings Ref="23" type="Stimulsoft.Report.Print.StiPrinterSettings" isKey="true" />
+  <ReferencedAssemblies isList="true" count="8">
+    <value>System.Dll</value>
+    <value>System.Drawing.Dll</value>
+    <value>System.Windows.Forms.Dll</value>
+    <value>System.Data.Dll</value>
+    <value>System.Xml.Dll</value>
+    <value>Stimulsoft.Controls.Dll</value>
+    <value>Stimulsoft.Base.Dll</value>
+    <value>Stimulsoft.Report.Dll</value>
+  </ReferencedAssemblies>
+  <ReportAlias>TempProject</ReportAlias>
+  <ReportChanged>10/20/2015 6:54:06 AM</ReportChanged>
+  <ReportCreated>7/4/2008 5:26:36 PM</ReportCreated>
+  <ReportGuid>fe8c4ebfd7a24d8ea0cb272bd7caf9b7</ReportGuid>
+  <ReportName>TempProject</ReportName>
+  <ReportUnit>Centimeters</ReportUnit>
+  <ReportVersion>2008.1.200</ReportVersion>
+  <Script>using System;
+using System.Drawing;
+using System.Windows.Forms;
+using System.Data;
+using Stimulsoft.Controls;
+using Stimulsoft.Base.Drawing;
+using Stimulsoft.Report;
+using Stimulsoft.Report.Dialogs;
+using Stimulsoft.Report.Components;
+
+namespace Reports
+{
+    
+    public class TempProject : Stimulsoft.Report.StiReport
+    {
+        
+        public TempProject()
+        {
+            this.InitializeComponent();
+        }
+        #region StiReport Designer generated code - do not modify#endregion StiReport Designer generated code - do not modify
+    }
+}</Script>
+  <ScriptLanguage>CSharp</ScriptLanguage>
+  <Styles isList="true" count="0" />
+</StiSerializer>

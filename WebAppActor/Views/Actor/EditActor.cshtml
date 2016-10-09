@@ -1,0 +1,114 @@
+﻿@model int
+
+@{
+    ViewBag.Title = "EditActor";
+}
+
+
+<div id="main" class="container-fluid " style="width: 800px; padding-top : 100px; padding-left:40px; display:none;">
+    <div class="row" style="width:100%;">
+        <div class="col-xs-3 col-md-3">
+            <button id="btnsave" type="button" class="btn btn-warning" style="float: left; width: 120px;">
+                <i class="glyphicon   glyphicon-save"></i><span style="padding: 10px;">Save</span>
+            </button>
+        </div>
+        <div class="col-xs-3 col-md-3">
+            <button id="btnphoto" type="button" class="btn btn-warning" style="float: left; width: 140px;">
+                <i class="glyphicon   glyphicon-camera"></i><span style="padding: 10px;">photo</span>
+            </button>
+        </div>
+        <div class="col-xs-3 col-md-3" data-original-title="">
+            <button id="btnprevieous" type="button" class="btn btn-warning" style="float: left; width: 180px;">
+                <i class="glyphicon   glyphicon-backward"></i><span style="padding: 10px;">previous page</span>
+            </button>
+        </div>
+
+    </div>
+</div>
+<div id="edit-actor">
+
+</div>
+<div id="alert-area">
+</div>
+<script type="text/javascript">
+
+    function raiseAlert(type, title, message) {
+        $("#alert-area").append($("<div class='alert alert-message fade in alert-" + type + "' data-alert> <a class='close' data-dismiss='alert'>×</a><strong>" + title + "</strong> " + message + "</div>"));
+        $(".alert-message").delay(2000).slideDown("slow", function () { $(this).remove(); });
+    }
+
+    $(function () {
+        function LoadModel() {
+            $("#edit-actor").load("/Actor/EditPartial/@Model");
+            //$("#main").css("display", "normal");
+            $("#main").delay(1000).show();
+        }
+
+        @*function LoadModel() {
+            var url = "/Actor/EditPartial/" + "@Model";
+            $.ajax({
+                url: url,
+                type: 'POST',
+                success: function (result) {
+                    if (result.success) {
+                        $('#edit-actor').load(url);
+                    }
+                    else {
+                        alert("Что-то не так, произошла ошибка. Попробуйте еще раз!");
+                    }
+                }
+            });
+        }*@
+
+        //$("#main").hide();
+        LoadModel();
+
+        $('#btnsave').click(function () {
+            //if ($('#form-edit').valid()) {
+            var model = $('#form-edit').serialize();
+
+            $.ajax({
+                url: '@Url.Action("EditPartial", "Actor")',
+                type: 'POST',
+                data: model,
+                dataType: "json",
+                success: function (data) {
+                    var Url = '@Url.Action("EditPartial", "Actor")';
+                    if (data.success) {
+                        //$("#edit-actor").delay(1000).slideDown("normal", function () { $(this).load(Url, { id: data.id }) });
+                        var UrlLoad = "/Actor/EditPartial/" + data.id;
+                        //$("#edit-actor").delay(1000).slideDown("normal", function () { $(this).load(uuu) });
+                        $("#edit-actor").load(UrlLoad);
+                        //raiseAlert('success', 'Notification Saved', 'Notification Saved in database.');
+                    }
+                    else raiseAlert('error', 'Error Saving Notification', 'We apologize, but we could not add your note at this time.');
+                },
+                error: function (XMLHttpRequest, textStatus, errorThrown) {
+                    raiseAlert('error', 'Error Saving Notification', 'We apologize, but we could not add your note at this time.');
+                }
+            });
+            //}
+        });
+
+
+
+
+
+
+        $('#btnprevieous').click(function () {
+            window.location.href = '@ViewBag.ReturnUrl';
+        });
+
+        $('#btnphoto').click(function () {
+            var id = $('#ActorId').attr('value');
+            window.location.href = '@Url.Action("GetPhotosActor", "Actor")' + '/' + id;
+
+        });
+
+    });
+
+
+</script>
+
+
+
